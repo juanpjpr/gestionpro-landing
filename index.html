@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>GestiónPro — Sistemas para Pymes</title>
 <meta name="description" content="Sistemas de gestión a medida para pymes y emprendimientos. Módulos que crecen con tu negocio."/>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('v3VXpSLad09PYGLlm')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
@@ -561,10 +563,7 @@ footer a:hover{color:rgba(255,255,255,.7)}
   <div class="contact-form rev">
     <div class="cf-title">Contanos de tu negocio</div>
     <div class="cf-sub">Completá el formulario y te respondemos con una propuesta.</div>
-    <form id="cfForm" onsubmit="handleForm(event)" action="https://formsubmit.co/juanp_jpr@hotmail.com" method="POST">
-      <input type="hidden" name="_subject" value="Nueva consulta — GestiónPro"/>
-      <input type="hidden" name="_captcha" value="false"/>
-      <input type="hidden" name="_template" value="table"/>
+    <form id="cfForm" onsubmit="handleForm(event)">
       <div class="fg-row">
         <div class="fg"><label>Nombre *</label><input type="text" name="nombre" placeholder="Tu nombre" required/></div>
         <div class="fg"><label>Negocio *</label><input type="text" name="negocio" placeholder="Nombre del negocio" required/></div>
@@ -581,6 +580,7 @@ footer a:hover{color:rgba(255,255,255,.7)}
         </select>
       </div>
       <div class="fg"><label>Contanos más</label><textarea name="mensaje" placeholder="¿Cómo funciona tu negocio hoy? ¿Qué problema querés resolver?"></textarea></div>
+      <input type="hidden" name="title" value="Nueva consulta desde GestiónPro"/>
       <button type="submit" class="cf-submit">Enviar consulta →</button>
     </form>
     <div class="cf-ok" id="cfOk">
@@ -800,10 +800,21 @@ document.querySelectorAll('.nav-links a').forEach(a=>{
 
 // ── FORM ──
 function handleForm(e){
-  setTimeout(()=>{
-    document.getElementById('cfForm').style.display='none'
-    document.getElementById('cfOk').style.display='block'
-  },500)
+  e.preventDefault()
+  const form = document.getElementById('cfForm')
+  const btn = form.querySelector('.cf-submit')
+  btn.textContent = 'Enviando...'
+  btn.disabled = true
+
+  emailjs.sendForm('service_qsfjmws', 'm95b8ur', form)
+    .then(()=>{
+      form.style.display='none'
+      document.getElementById('cfOk').style.display='block'
+    })
+    .catch(()=>{
+      btn.textContent = 'Error al enviar. Intentá de nuevo.'
+      btn.disabled = false
+    })
 }
 
 // ── REVEAL ──
