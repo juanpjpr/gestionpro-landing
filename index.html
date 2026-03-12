@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GestiónPro — Sistemas para Pymes</title>
+<meta name="description" content="Sistemas de gestión a medida para pymes y emprendimientos. Módulos que crecen con tu negocio."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:#0C1524;background:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+:root{
+  --navy:#0C1524;--navy2:#152035;--blue:#1A56DB;--blue-lt:#EEF3FF;
+  --gray:#64748B;--gray-lt:#F8F9FB;--border:#E4E7ED;--white:#fff;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;padding:0 6%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(12,21,36,.97);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(8px);
+}
+.logo{font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.logo span{color:var(--blue);font-weight:300}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--blue)!important;color:#fff!important;padding:.45rem 1.2rem;border-radius:6px;font-weight:600!important;font-size:.82rem!important;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.85!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hbg span{width:20px;height:1.5px;background:#fff;border-radius:2px}
+
+/* HERO */
+#hero{min-height:100vh;background:var(--navy);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:64px 6% 0}
+.hero-inner{padding:5rem 0}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:2rem}
+.hero-tag::before{content:'';width:20px;height:1px;background:var(--blue)}
+h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:1.04;letter-spacing:-.04em;color:#fff;margin-bottom:1.8rem}
+h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.35)}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,.45);line-height:1.75;max-width:500px;margin-bottom:3rem;font-weight:400}
+.hero-desc strong{color:rgba(255,255,255,.75);font-weight:600}
+.hero-actions{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.btn-primary{background:var(--blue);color:#fff;padding:.85rem 2rem;border-radius:6px;font-weight:700;font-size:.9rem;text-decoration:none;letter-spacing:-.01em;transition:opacity .2s,transform .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+.btn-link{color:rgba(255,255,255,.35);font-size:.875rem;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+.btn-link:hover{color:rgba(255,255,255,.65)}
+.hero-data{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
+.hd-num{font-size:1.7rem;font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1;margin-bottom:.3rem}
+.hd-num span{color:var(--blue)}
+.hd-lbl{font-size:.75rem;color:rgba(255,255,255,.3);font-weight:500;letter-spacing:.03em}
+/* Hero right module builder */
+.hero-mod{display:flex;flex-direction:column;padding:4rem 0;align-self:stretch;justify-content:center}
+
+/* SECTIONS */
+section{padding:7rem 6%}
+.section-label{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:1.2rem;display:block}
+h2{font-size:clamp(1.9rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-.035em;color:var(--navy);margin-bottom:1rem}
+.section-sub{font-size:.975rem;color:var(--gray);line-height:1.7;max-width:500px}
+
+/* SERVICIOS */
+#servicios{background:var(--white)}
+.srv-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.srv-header-right{font-size:.875rem;color:var(--gray);line-height:1.8;border-left:2px solid var(--border);padding-left:2rem}
+.srv-header-right strong{color:var(--navy);font-weight:600}
+.srv-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.srv-item{padding:2rem 1.8rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .2s;cursor:default}
+.srv-item:hover{background:var(--gray-lt)}
+.srv-item:nth-child(4n){border-right:none}
+.srv-item:nth-last-child(-n+4){border-bottom:none}
+.srv-ico{width:36px;height:36px;margin-bottom:1.1rem;color:var(--blue);opacity:.8}
+.srv-item:hover .srv-ico{opacity:1}
+.srv-item h3{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;letter-spacing:-.01em}
+.srv-item p{font-size:.8rem;color:var(--gray);line-height:1.6}
+
+/* ── MODULE BUILDER ── */
+.mod-builder{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  background:rgba(255,255,255,.03);
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  height:100%;max-height:520px;
+}
+/* In services, add margin */
+#servicios .mod-builder{margin-top:3.5rem;max-height:none}
+/* Left: chip selector */
+.mod-chips{
+  padding:1.4rem 1.1rem;
+  border-right:1px solid rgba(255,255,255,.06);
+  display:flex;flex-direction:column;
+}
+.mod-chips-title{
+  font-size:.62rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.25);
+  margin-bottom:.8rem;
+}
+.mod-list{display:flex;flex-direction:column;gap:.25rem;flex:1}
+.mc{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.48rem .7rem;border-radius:6px;
+  background:transparent;border:1px solid transparent;
+  color:rgba(255,255,255,.35);
+  font-size:.8rem;font-weight:500;
+  cursor:pointer;transition:.18s;
+  text-align:left;width:100%;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.mc-icon{width:15px;height:15px;flex-shrink:0;opacity:.6;transition:opacity .18s}
+.mc-check{
+  margin-left:auto;width:15px;height:15px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:.18s;
+}
+.mc:hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.6)}
+.mc.on{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.09);color:#fff}
+.mc.on .mc-icon{opacity:1}
+.mc.on .mc-check{background:var(--blue);border-color:var(--blue)}
+.mc.on .mc-check::after{content:'';display:block;width:4px;height:7px;border:1.5px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
+.mod-footer{
+  padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);
+  margin-top:.8rem;
+  display:flex;flex-direction:column;gap:.7rem;
+}
+.mod-count{font-size:.75rem;color:rgba(255,255,255,.3)}
+.mod-count strong{color:var(--blue);font-size:.95rem;font-weight:800}
+
+/* Right: screen mockup */
+.mod-screen{display:flex;flex-direction:column}
+.ms-bar{
+  background:rgba(0,0,0,.3);
+  padding:.6rem 1rem;
+  display:flex;align-items:center;gap:.45rem;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  flex-shrink:0;
+}
+.ms-dot{width:9px;height:9px;border-radius:50%}
+.ms-dot:nth-child(1){background:#FF5F57}
+.ms-dot:nth-child(2){background:#FEBC2E}
+.ms-dot:nth-child(3){background:#28C840}
+.ms-bar-title{font-size:.7rem;color:rgba(255,255,255,.2);margin-left:.5rem;letter-spacing:.04em}
+.ms-body{display:flex;flex:1;overflow:hidden}
+.ms-sidebar{
+  width:42px;background:rgba(0,0,0,.2);
+  border-right:1px solid rgba(255,255,255,.04);
+  padding:.6rem .4rem;
+  display:flex;flex-direction:column;gap:.35rem;
+  flex-shrink:0;
+}
+.ms-nav{
+  width:28px;height:28px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  animation:navIn .28s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes navIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.ms-main{
+  flex:1;padding:.8rem;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:.5rem;align-content:start;
+  overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent;
+}
+.ms-main::-webkit-scrollbar{width:3px}
+.ms-main::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+
+/* Widget cards */
+.wg{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:8px;overflow:hidden;
+  animation:wgIn .35s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.wg.wide{grid-column:1/-1}
+@keyframes wgIn{from{opacity:0;transform:scale(.82) translateY(8px)}to{opacity:1;transform:none}}
+.wg-head{
+  padding:.45rem .65rem;
+  display:flex;align-items:center;gap:.4rem;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.wg-head-label{font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.5);flex:1}
+.wg-badge{font-size:.55rem;font-weight:600;padding:.15rem .45rem;border-radius:3px}
+.wg-body{padding:.55rem .65rem;display:flex;flex-direction:column;gap:.35rem}
+/* wg row types */
+.wg-row{display:flex;align-items:center;gap:.4rem}
+.wg-time{font-size:.6rem;color:rgba(255,255,255,.3);width:26px;flex-shrink:0}
+.wg-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.wg-name{font-size:.62rem;color:rgba(255,255,255,.55)}
+.wg-bar-wrap{display:flex;align-items:center;gap:.4rem}
+.wg-bar-label{font-size:.58rem;color:rgba(255,255,255,.3);width:48px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wg-bar-track{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.wg-bar-fill{height:100%;border-radius:2px;transition:width .4s ease}
+.wg-bar-val{font-size:.58rem;color:rgba(255,255,255,.3);width:20px;text-align:right}
+.wg-order-row{display:flex;align-items:center;gap:.35rem}
+.wg-order-id{font-size:.58rem;color:rgba(255,255,255,.3);width:28px}
+.wg-status{font-size:.52rem;font-weight:600;padding:.1rem .35rem;border-radius:3px}
+.wg-order-val{font-size:.6rem;color:rgba(255,255,255,.5);margin-left:auto}
+.wg-big-num{font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1;margin-bottom:.2rem}
+.wg-big-sub{font-size:.58rem;color:rgba(255,255,255,.3)}
+.wg-divider{height:1px;background:rgba(255,255,255,.05);margin:.3rem 0}
+.wg-kv{display:flex;justify-content:space-between;align-items:center}
+.wg-kv-k{font-size:.58rem;color:rgba(255,255,255,.3)}
+.wg-kv-v{font-size:.6rem;color:rgba(255,255,255,.55);font-weight:600}
+.wg-avatar-row{display:flex;align-items:center;gap:.4rem}
+.wg-av{width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.45rem;font-weight:700;color:#fff;flex-shrink:0}
+/* mini chart */
+.wg-chart{height:40px;display:flex;align-items:flex-end;gap:2px;padding-top:.2rem}
+.wg-bar-c{border-radius:2px 2px 0 0;flex:1;min-width:4px;transition:height .4s ease}
+/* empty state */
+.ms-empty{
+  grid-column:1/-1;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;height:200px;gap:.5rem;
+  color:rgba(255,255,255,.12);font-size:.75rem;text-align:center;
+}
+
+/* PLANES */
+#planes{background:var(--gray-lt);border-top:1px solid var(--border)}
+.planes-header{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3rem}
+.planes-header .section-sub{margin:0}
+.planes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.plan-card{background:var(--white);padding:2.5rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:background .2s}
+.plan-card.featured{background:var(--navy);color:#fff}
+.plan-badge{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--blue);color:#fff;padding:.2rem .7rem;border-radius:3px;margin-bottom:1.5rem;width:fit-content}
+.plan-name{font-size:1.05rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;margin-bottom:.4rem}
+.plan-card.featured .plan-name{color:#fff}
+.plan-price{font-size:1.6rem;font-weight:800;color:var(--blue);letter-spacing:-.03em;margin:.8rem 0 .3rem}
+.plan-card.featured .plan-price{color:#93b4ff}
+.plan-price sub{font-size:.9rem;font-weight:500;color:var(--gray);vertical-align:baseline}
+.plan-desc{font-size:.82rem;color:var(--gray);line-height:1.65;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border);flex:1}
+.plan-card.featured .plan-desc{color:rgba(255,255,255,.4);border-bottom-color:rgba(255,255,255,.08)}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:2.2rem}
+.plan-features li{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:var(--gray);line-height:1.5}
+.plan-card.featured .plan-features li{color:rgba(255,255,255,.5)}
+.plan-features li::before{content:'';width:14px;height:14px;flex-shrink:0;margin-top:1px;border-radius:50%;background:var(--blue);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 7l2.5 2.5L11 4.5' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:100%}
+.plan-cta{display:block;text-align:center;text-decoration:none;padding:.8rem;border-radius:6px;font-weight:700;font-size:.85rem;letter-spacing:-.01em;transition:.2s}
+.plan-cta.outline{border:1.5px solid var(--border);color:var(--navy)}
+.plan-cta.outline:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.plan-cta.solid{background:var(--blue);color:#fff}
+.plan-cta.solid:hover{opacity:.88}
+.plan-nota{text-align:center;font-size:.78rem;color:var(--gray);margin-top:1.5rem}
+
+/* CONTACTO */
+#contacto{background:var(--white);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 480px;gap:6rem;align-items:start}
+.contact-left .section-label{margin-bottom:1.2rem}
+.contact-left h2{margin-bottom:1rem}
+.contact-left p{font-size:.95rem;color:var(--gray);line-height:1.75;margin-bottom:2.5rem;max-width:380px}
+.contact-points{display:flex;flex-direction:column;gap:.7rem}
+.cp{display:flex;align-items:center;gap:.9rem;font-size:.85rem;color:var(--gray);padding:.85rem 1.1rem;border:1px solid var(--border);border-radius:8px}
+.cp-ico{width:20px;height:20px;flex-shrink:0;color:var(--blue)}
+.cp strong{color:var(--navy);font-weight:600}
+.contact-form{background:var(--gray-lt);border:1px solid var(--border);border-radius:12px;padding:2.5rem}
+.cf-title{font-size:1.05rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;margin-bottom:.3rem}
+.cf-sub{font-size:.8rem;color:var(--gray);margin-bottom:2rem}
+.fg{margin-bottom:.9rem}
+.fg label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:.35rem}
+.fg input,.fg select,.fg textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);background:#fff;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;color:var(--navy);outline:none;transition:border-color .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,.07)}
+.fg textarea{resize:vertical;min-height:80px}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.cf-submit{width:100%;padding:.85rem;background:var(--navy);color:#fff;border:none;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;letter-spacing:-.01em;transition:.2s;margin-top:.4rem}
+.cf-submit:hover{background:var(--blue)}
+.cf-ok{display:none;text-align:center;padding:2rem 1rem}
+.cf-ok .ok-ico{font-size:2.5rem;margin-bottom:.8rem}
+.cf-ok strong{font-size:1rem;font-weight:800;color:var(--navy)}
+.cf-ok p{font-size:.82rem;color:var(--gray);margin-top:.3rem}
+
+/* FOOTER */
+footer{background:var(--navy);padding:1.8rem 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-size:.95rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.footer-logo span{color:var(--blue);font-weight:300}
+footer p{font-size:.78rem;color:rgba(255,255,255,.3)}
+footer a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+footer a:hover{color:rgba(255,255,255,.7)}
+
+/* FLOAT */
+.float-btn{position:fixed;bottom:1.6rem;right:1.6rem;z-index:99;background:var(--navy);color:#fff;padding:.65rem 1.3rem;border-radius:6px;font-weight:700;font-size:.8rem;letter-spacing:-.01em;text-decoration:none;box-shadow:0 4px 20px rgba(12,21,36,.3);border:1px solid rgba(255,255,255,.1);transition:.2s}
+.float-btn:hover{background:var(--blue);border-color:var(--blue)}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.rev.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .srv-grid{grid-template-columns:repeat(2,1fr)}
+  .srv-item:nth-child(2n){border-right:none}
+  .srv-item:nth-last-child(-n+2){border-bottom:none}
+  .srv-header{grid-template-columns:1fr}
+  .planes-grid{grid-template-columns:1fr}
+  #contacto{grid-template-columns:1fr}
+  .mod-builder{grid-template-columns:220px 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none;flex-direction:column;gap:1rem;position:fixed;top:64px;left:0;right:0;background:var(--navy);padding:1.5rem 6%;border-bottom:1px solid rgba(255,255,255,.07)}
+  .nav-links.open{display:flex}
+  .hbg{display:flex}
+  #hero{padding-top:64px}
+  .hero-inner{padding:3.5rem 0}
+  .hero-data{gap:2rem}
+  section{padding:4.5rem 5%!important}
+  #contacto{padding:4.5rem 5%!important;gap:3rem}
+  #hero{grid-template-columns:1fr;gap:0}
+  .hero-mod{padding:0 0 3rem}
+  .mod-builder{grid-template-columns:1fr;max-height:none}
+  .mod-chips{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
+  .mod-list{display:grid;grid-template-columns:1fr 1fr;gap:.25rem}
+  .ms-main{grid-template-columns:1fr 1fr}
+  .fg-row{grid-template-columns:1fr}
+  .float-btn{bottom:1rem;right:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Gestión<span>Pro</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#contacto" class="nav-cta">Cotizá gratis</a></li>
+  </ul>
+  <div class="hbg" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Para pymes · emprendimientos · comercios</div>
+    <h1>Tu negocio,<br>un sistema <em>a medida.</em></h1>
+    <p class="hero-desc">
+      Dejá de manejar todo con planillas y WhatsApp.
+      Te armamos el sistema exacto que necesita tu negocio —
+      <strong>turnos, stock, pedidos, facturación y más.</strong>
+      Módulos que arrancás hoy y escalás cuando crezcás.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-primary">Cotizá gratis →</a>
+      <a href="#servicios" class="btn-link">Ver servicios ↓</a>
+    </div>
+    <div class="hero-data">
+      <div class="hd-item">
+        <div class="hd-num"><span>+</span>30</div>
+        <div class="hd-lbl">Pymes digitalizadas</div>
+      </div>
+      <div class="hd-item">
+        <div class="hd-num">100<span>%</span></div>
+        <div class="hd-lbl">A medida</div>
+      </div>
+      <div class="hd-item">
+        <div class="hd-num">24<span>h</span></div>
+        <div class="hd-lbl">Respuesta cotización</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module builder — hero right -->
+  <div class="hero-mod">
+    <div class="mod-builder" id="modBuilder">
+      <div class="mod-chips">
+        <div class="mod-chips-title">Armá tu sistema</div>
+        <div class="mod-list" id="modList"></div>
+        <div class="mod-footer">
+          <div class="mod-count"><strong id="modCountN">0</strong> módulos activos</div>
+          <a href="#contacto" class="btn-primary" style="font-size:.75rem;padding:.45rem .9rem">Cotizar →</a>
+        </div>
+      </div>
+      <div class="mod-screen">
+        <div class="ms-bar">
+          <span class="ms-dot"></span><span class="ms-dot"></span><span class="ms-dot"></span>
+          <span class="ms-bar-title">GestiónPro — vista previa</span>
+        </div>
+        <div class="ms-body">
+          <div class="ms-sidebar" id="msSidebar"></div>
+          <div class="ms-main" id="msMain">
+            <div class="ms-empty" id="msEmpty">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              <span>Tocá un módulo<br>para verlo en acción</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="srv-header rev">
+    <div>
+      <span class="section-label">Qué hacemos</span>
+      <h2>Todo lo que tu negocio necesita<br>en un solo sistema</h2>
+    </div>
+    <div class="srv-header-right">
+      No pagás por funciones que no usás.
+      <strong>Elegís los módulos que necesitás hoy</strong>
+      y sumás más cuando tu negocio crezca.
+      Tus datos siempre intactos, todo conectado.
+    </div>
+  </div>
+
+  <div class="srv-grid rev">
+    <!-- Turnos -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M8 14l2.5 2.5L16 11"/>
+      </svg>
+      <h3>Turnos Online</h3>
+      <p>Tus clientes reservan solos y reciben recordatorio automático. Cero llamadas para coordinar.</p>
+    </div>
+    <!-- Stock -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 7v10l9 5 9-5V7L12 2z"/><path d="M3 7l9 5 9-5M12 12v10"/>
+      </svg>
+      <h3>Control de Stock</h3>
+      <p>Stock en tiempo real y alertas de quiebre. Se acabó el "me quedé sin producto sin saberlo".</p>
+    </div>
+    <!-- Pedidos -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/>
+      </svg>
+      <h3>Pedidos y Ventas</h3>
+      <p>Registrá cada venta en segundos. Historial ordenado. Chau WhatsApp caótico.</p>
+    </div>
+    <!-- Factura -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6M8 13h8M8 17h5"/>
+      </svg>
+      <h3>Facturación</h3>
+      <p>Facturas, remitos y presupuestos desde cualquier dispositivo. Integración AFIP incluida.</p>
+    </div>
+    <!-- Caja -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <rect x="1" y="7" width="22" height="14" rx="2"/><path d="M1 10h22M8 3h8"/><circle cx="17" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+      <h3>Caja y Finanzas</h3>
+      <p>Ingresos, egresos y cierre diario. Por fin sabés exactamente qué le entra y qué le sale.</p>
+    </div>
+    <!-- Clientes -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="9" cy="7" r="4"/><path d="M3 21a6 6 0 0112 0"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21a4 4 0 00-3-3.85"/>
+      </svg>
+      <h3>Clientes</h3>
+      <p>Historial de compras y contacto. Conocé mejor a quien te compra y hacelo volver.</p>
+    </div>
+    <!-- Reportes -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 17l4-5 4 3.5 4-5.5 4 3.5"/><path d="M3 21h18"/><path d="M3 3v18"/>
+      </svg>
+      <h3>Reportes</h3>
+      <p>Al cerrar el día sabés cuánto vendiste y qué movió más. Sin calcular nada a mano.</p>
+    </div>
+    <!-- A medida -->
+    <div class="srv-item">
+      <svg class="srv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+      <h3>Módulo a medida</h3>
+      <p>¿Necesitás algo específico? Lo construimos. Cada negocio es distinto, tu sistema también.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- PLANES -->
+<section id="planes">
+  <div class="planes-header rev">
+    <div>
+      <span class="section-label">Modelos de pago</span>
+      <h2>Sin contratos largos.<br>Sin sorpresas.</h2>
+    </div>
+    <p class="section-sub">Dos formas claras de pagar. Elegís según tu bolsillo y cómo querés manejarte.</p>
+  </div>
+  <div class="planes-grid rev">
+    <div class="plan-card">
+      <div class="plan-name">Pago Único</div>
+      <div class="plan-price">A consultar</div>
+      <p class="plan-desc">Lo pagás una vez y el sistema es tuyo para siempre. Ideal para quien prefiere una inversión puntual sin mensualidades.</p>
+      <ul class="plan-features">
+        <li>Sistema 100% a tu medida</li>
+        <li>Capacitación de tu equipo</li>
+        <li>3 meses de soporte incluido</li>
+        <li>El sistema es tuyo, no alquilado</li>
+        <li>Sin cuotas mensuales</li>
+      </ul>
+      <a href="#contacto" class="plan-cta outline">Cotizar mi sistema</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">Preferido por pymes</div>
+      <div class="plan-name">Suscripción Mensual</div>
+      <div class="plan-price">Cuota fija <sub>/ mes</sub></div>
+      <p class="plan-desc">Sin inversión inicial grande. Cuota mensual adaptada a tu sistema. Ideal para cuidar el capital hoy y escalar después.</p>
+      <ul class="plan-features">
+        <li>Sistema 100% a tu medida</li>
+        <li>Capacitación incluida</li>
+        <li>Soporte mensual continuo</li>
+        <li>Actualizaciones sin costo extra</li>
+        <li>Hosting y backups incluidos</li>
+        <li>Cancelás cuando querás</li>
+      </ul>
+      <a href="#contacto" class="plan-cta solid">Quiero arrancar así</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Multi-sucursal</div>
+      <div class="plan-price">100% <sub>a medida</sub></div>
+      <p class="plan-desc">Para negocios con varias sucursales o equipos grandes. Todo conectado, con roles y reportes consolidados.</p>
+      <ul class="plan-features">
+        <li>Todo lo anterior, multiplicado</li>
+        <li>Sucursales conectadas</li>
+        <li>Roles y permisos por usuario</li>
+        <li>Reportes consolidados</li>
+        <li>Soporte prioritario</li>
+      </ul>
+      <a href="#contacto" class="plan-cta outline">Hablemos de tu caso</a>
+    </div>
+  </div>
+  <p class="plan-nota">El precio se define según lo que necesita tu negocio. Cotizá sin compromiso — es gratis.</p>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-left rev">
+    <span class="section-label">Contacto</span>
+    <h2>El primer paso<br>es una consulta.</h2>
+    <p>No necesitás saber qué sistema querés. Contanos cómo trabaja tu negocio hoy y te respondemos con una propuesta clara en menos de 24hs.</p>
+    <div class="contact-points">
+      <div class="cp">
+        <svg class="cp-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M3 4h14a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z"/><path d="M2 5l8 7 8-7"/>
+        </svg>
+        <span><strong>Email:</strong>&nbsp; <a href="mailto:jprjuanp@gmail.com" style="color:var(--blue);text-decoration:none">jprjuanp@gmail.com</a></span>
+      </div>
+      <div class="cp">
+        <svg class="cp-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 3"/>
+        </svg>
+        <span>Respondemos en <strong>menos de 24 horas hábiles</strong></span>
+      </div>
+      <div class="cp">
+        <svg class="cp-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M4 10l4 4 8-8"/>
+        </svg>
+        <span>Cotización <strong>100% gratis</strong>, sin compromiso</span>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form rev">
+    <div class="cf-title">Contanos de tu negocio</div>
+    <div class="cf-sub">Completá el formulario y te respondemos con una propuesta.</div>
+    <form id="cfForm" onsubmit="handleForm(event)" action="https://formsubmit.co/jprjuanp@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Nueva consulta — GestiónPro"/>
+      <input type="hidden" name="_captcha" value="false"/>
+      <input type="hidden" name="_template" value="table"/>
+      <div class="fg-row">
+        <div class="fg"><label>Nombre *</label><input type="text" name="nombre" placeholder="Tu nombre" required/></div>
+        <div class="fg"><label>Negocio *</label><input type="text" name="negocio" placeholder="Nombre del negocio" required/></div>
+      </div>
+      <div class="fg"><label>Email *</label><input type="email" name="email" placeholder="tu@email.com" required/></div>
+      <div class="fg">
+        <label>¿Qué necesitás?</label>
+        <select name="servicio">
+          <option value="" disabled selected>Seleccioná un área</option>
+          <option>Turnos Online</option><option>Control de Stock</option>
+          <option>Pedidos y Ventas</option><option>Facturación</option>
+          <option>Caja y Finanzas</option><option>Sistema completo</option>
+          <option>No sé, quiero asesorarme</option>
+        </select>
+      </div>
+      <div class="fg"><label>Contanos más</label><textarea name="mensaje" placeholder="¿Cómo funciona tu negocio hoy? ¿Qué problema querés resolver?"></textarea></div>
+      <button type="submit" class="cf-submit">Enviar consulta →</button>
+    </form>
+    <div class="cf-ok" id="cfOk">
+      <div class="ok-ico">✓</div>
+      <strong>Mensaje recibido.</strong>
+      <p>Te respondemos en menos de 24hs hábiles.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Gestión<span>Pro</span></div>
+  <p>&copy; 2026 · Sistemas para pymes · <a href="mailto:jprjuanp@gmail.com">jprjuanp@gmail.com</a></p>
+</footer>
+
+<a href="#contacto" class="float-btn">Cotizá gratis →</a>
+
+<script>
+// ── MODULE DATA ──
+const MODS = [
+  {
+    id:'turnos', label:'Turnos', col:'#3B82F6',
+    icon:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="1" y="2" width="14" height="13" rx="2"/><path d="M1 6h14M5 1v3M11 1v3"/><path d="M4.5 10l2 2 4-3.5"/></svg>`,
+    navBg:'rgba(59,130,246,.2)',
+    widget(){ return `
+      <div class="wg">
+        <div class="wg-head" style="background:rgba(59,130,246,.12)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" width="10" height="10"><rect x="1" y="2" width="14" height="12" rx="2"/><path d="M1 6h14M5 1v3M11 1v3"/></svg>
+          <span class="wg-head-label">Turnos</span>
+          <span class="wg-badge" style="background:rgba(59,130,246,.2);color:#93c5fd">Hoy · 8</span>
+        </div>
+        <div class="wg-body">
+          <div class="wg-row"><span class="wg-time">09:00</span><span class="wg-dot" style="background:#3B82F6"></span><span class="wg-name">María G.</span></div>
+          <div class="wg-row"><span class="wg-time">10:30</span><span class="wg-dot" style="background:#60a5fa"></span><span class="wg-name">Carlos M.</span></div>
+          <div class="wg-row"><span class="wg-time">12:00</span><span class="wg-dot" style="background:#93c5fd"></span><span class="wg-name">Laura P.</span></div>
+          <div class="wg-row" style="margin-top:.1rem"><span class="wg-time"></span><span class="wg-name" style="color:rgba(255,255,255,.25);font-size:.56rem">+5 turnos más</span></div>
+        </div>
+      </div>`
+    }
+  },
+  {
+    id:'stock', label:'Stock', col:'#10B981',
+    icon:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1L1 4.5v7L8 15l7-3.5v-7L8 1z"/><path d="M1 4.5L8 8l7-3.5M8 8v7"/></svg>`,
+    navBg:'rgba(16,185,129,.2)',
+    widget(){ return `
+      <div class="wg">
+        <div class="wg-head" style="background:rgba(16,185,129,.1)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M8 1L1 4.5v7L8 15l7-3.5v-7L8 1z"/><path d="M1 4.5L8 8l7-3.5M8 8v7"/></svg>
+          <span class="wg-head-label">Stock</span>
+          <span class="wg-badge" style="background:rgba(16,185,129,.15);color:#6ee7b7">245 items</span>
+        </div>
+        <div class="wg-body">
+          <div class="wg-bar-wrap"><span class="wg-bar-label">Remeras</span><div class="wg-bar-track"><div class="wg-bar-fill" style="width:78%;background:#10B981"></div></div><span class="wg-bar-val" style="color:rgba(255,255,255,.4)">78%</span></div>
+          <div class="wg-bar-wrap"><span class="wg-bar-label">Pantalones</span><div class="wg-bar-track"><div class="wg-bar-fill" style="width:52%;background:#34d399"></div></div><span class="wg-bar-val" style="color:rgba(255,255,255,.4)">52%</span></div>
+          <div class="wg-bar-wrap"><span class="wg-bar-label">Accesorios</span><div class="wg-bar-track"><div class="wg-bar-fill" style="width:18%;background:#f87171"></div></div><span class="wg-bar-val" style="color:#f87171">18%</span></div>
+        </div>
+      </div>`
+    }
+  },
+  {
+    id:'pedidos', label:'Pedidos', col:'#F59E0B',
+    icon:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 3H4a2 2 0 00-2 2v9a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2h-2"/><rect x="5.5" y="1.5" width="5" height="3" rx="1"/><path d="M5.5 9h5M5.5 12h3"/></svg>`,
+    navBg:'rgba(245,158,11,.2)',
+    widget(){ return `
+      <div class="wg">
+        <div class="wg-head" style="background:rgba(245,158,11,.1)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" width="10" height="10"><path d="M6 3H4a2 2 0 00-2 2v9a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2h-2"/><rect x="5.5" y="1.5" width="5" height="3" rx="1"/></svg>
+          <span class="wg-head-label">Pedidos</span>
+          <span class="wg-badge" style="background:rgba(245,158,11,.15);color:#fcd34d">3 nuevos</span>
+        </div>
+        <div class="wg-body">
+          <div class="wg-order-row"><span class="wg-order-id">#042</span><span class="wg-status" style="background:rgba(245,158,11,.2);color:#fcd34d">En camino</span><span class="wg-order-val">$1.200</span></div>
+          <div class="wg-order-row"><span class="wg-order-id">#043</span><span class="wg-status" style="background:rgba(16,185,129,.2);color:#6ee7b7">Entregado</span><span class="wg-order-val">$850</span></div>
+          <div class="wg-order-row"><span class="wg-order-id">#044</span><span class="wg-status" style="background:rgba(148,163,184,.15);color:rgba(148,163,184,.7)">Pendiente</span><span class="wg-order-val">$2.100</span></div>
+        </div>
+      </div>`
+    }
+  },
+  {
+    id:'factura', label:'Facturación', col:'#8B5CF6',
+    icon:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M10 1H4a2 2 0 00-2 2v11a1 1 0 001.5.87L5 14l1.5.87L8 14l1.5.87L11 14l1.5.87A1 1 0 0014 14V3a2 2 0 00-2-2h-2z"/><path d="M5 6h6M5 9h6M5 12h3"/></svg>`,
+    navBg:'rgba(139,92,246,.2)',
+    widget(){ return `
+      <div class="wg">
+        <div class="wg-head" style="background:rgba(139,92,246,.12)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round" width="10" height="10"><path d="M10 1H4a2 2 0 00-2 2v11a1 1 0 001.5.87L5 14l1.5.87L8 14l1.5.87L11 14l1.5.87A1 1 0 0014 14V3a2 2 0 00-2-2h-2z"/></svg>
+          <span class="wg-head-label">Facturación</span>
+        </div>
+        <div class="wg-body">
+          <div class="wg-kv"><span class="wg-kv-k">Fact. #0042</span><span class="wg-kv-v" style="color:#a78bfa">$8.500</span></div>
+          <div class="wg-kv"><span class="wg-kv-k">Fact. #0041</span><span class="wg-kv-v">$3.200</span></div>
+          <div class="wg-divider"></div>
+          <div class="wg-kv"><span class="wg-kv-k" style="color:#a78bfa;font-weight:600">Mes actual</span><span class="wg-kv-v" style="color:#a78bfa">$42.800</span></div>
+        </div>
+      </div>`
+    }
+  },
+  {
+    id:'caja', label:'Caja', col:'#06B6D4',
+    icon:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="1" y="5" width="14" height="10" rx="2"/><path d="M1 8h14M5 2h6"/><circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/></svg>`,
+    navBg:'rgba(6,182,212,.2)',
+    widget(){ return `
+      <div class="wg">
+        <div class="wg-head" style="background:rgba(6,182,212,.1)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" width="10" height="10"><rect x="1" y="5" width="14" height="10" rx="2"/><path d="M1 8h14M5 2h6"/></svg>
+          <span class="wg-head-label">Caja</span>
+          <span class="wg-badge" style="background:rgba(6,182,212,.15);color:#67e8f9">Abierta</span>
+        </div>
+        <div class="wg-body">
+          <div class="wg-big-num">$24.500</div>
+          <div class="wg-big-sub" style="color:#67e8f9;margin-bottom:.3rem">↑ 12% vs ayer</div>
+          <div class="wg-divider"></div>
+          <div class="wg-kv"><span class="wg-kv-k">Ingresos</span><span class="wg-kv-v" style="color:#6ee7b7">$28.000</span></div>
+          <div class="wg-kv"><span class="wg-kv-k">Egresos</span><span class="wg-kv-v" style="color:#f87171">$3.500</span></div>
+        </div>
+      </div>`
+    }
+  },
+  {
+    id:'clientes', label:'Clientes', col:'#EC4899',
+    icon:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="6.5" cy="5" r="3"/><path d="M1 15a5.5 5.5 0 0111 0"/><circle cx="13" cy="5.5" r="2"/><path d="M15 14a3 3 0 00-2.5-3"/></svg>`,
+    navBg:'rgba(236,72,153,.2)',
+    widget(){ return `
+      <div class="wg">
+        <div class="wg-head" style="background:rgba(236,72,153,.1)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#EC4899" stroke-width="1.5" stroke-linecap="round" width="10" height="10"><circle cx="6.5" cy="5" r="3"/><path d="M1 15a5.5 5.5 0 0111 0"/></svg>
+          <span class="wg-head-label">Clientes</span>
+          <span class="wg-badge" style="background:rgba(236,72,153,.15);color:#f9a8d4">128 total</span>
+        </div>
+        <div class="wg-body">
+          <div class="wg-avatar-row"><div class="wg-av" style="background:#EC4899">MG</div><span class="wg-name">María García</span><span style="margin-left:auto;font-size:.55rem;color:rgba(255,255,255,.25)">3 compras</span></div>
+          <div class="wg-avatar-row"><div class="wg-av" style="background:#8B5CF6">CR</div><span class="wg-name">Carlos R.</span><span style="margin-left:auto;font-size:.55rem;color:rgba(255,255,255,.25)">7 compras</span></div>
+          <div class="wg-avatar-row"><div class="wg-av" style="background:#F59E0B">LA</div><span class="wg-name">Laura A.</span><span style="margin-left:auto;font-size:.55rem;color:rgba(255,255,255,.25)">1 compra</span></div>
+        </div>
+      </div>`
+    }
+  },
+  {
+    id:'reportes', label:'Reportes', col:'#6366F1',
+    icon:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l3-4 3 2.5 3-4 3 2.5"/><path d="M2 15h12M2 2v13"/></svg>`,
+    navBg:'rgba(99,102,241,.2)',
+    widget(){ return `
+      <div class="wg wide">
+        <div class="wg-head" style="background:rgba(99,102,241,.12)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M2 12l3-4 3 2.5 3-4 3 2.5"/><path d="M2 15h12M2 2v13"/></svg>
+          <span class="wg-head-label">Ventas — últimos 7 días</span>
+        </div>
+        <div class="wg-body" style="padding-bottom:.8rem">
+          <div class="wg-chart">
+            ${[45,62,38,71,55,88,64].map((h,i)=>`<div class="wg-bar-c" style="height:${h}%;background:${i===5?'#6366F1':'rgba(99,102,241,.3)'}"></div>`).join('')}
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:.3rem">
+            ${['L','M','X','J','V','S','D'].map(d=>`<span style="font-size:.5rem;color:rgba(255,255,255,.2);flex:1;text-align:center">${d}</span>`).join('')}
+          </div>
+        </div>
+      </div>`
+    }
+  },
+]
+
+// ── RENDER MODULE BUILDER ──
+function renderMods(){
+  const list = document.getElementById('modList')
+  list.innerHTML = MODS.map(m=>`
+    <button class="mc" data-id="${m.id}" onclick="toggleMod('${m.id}')">
+      <span class="mc-icon">${m.icon}</span>
+      <span>${m.label}</span>
+      <span class="mc-check"></span>
+    </button>
+  `).join('')
+}
+
+function toggleMod(id){
+  const chip = document.querySelector(`.mc[data-id="${id}"]`)
+  const mod = MODS.find(m=>m.id===id)
+  const isOn = chip.classList.toggle('on')
+  const sidebar = document.getElementById('msSidebar')
+  const main = document.getElementById('msMain')
+  const empty = document.getElementById('msEmpty')
+
+  if(isOn){
+    // add sidebar icon
+    const nav = document.createElement('div')
+    nav.className = 'ms-nav'
+    nav.id = 'nav-'+id
+    nav.style.background = mod.navBg
+    nav.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="${mod.col}" stroke-width="1.4" width="13" height="13">${mod.icon.match(/<svg[^>]*>(.*)<\/svg>/s)?.[1]||''}</svg>`
+    sidebar.appendChild(nav)
+    // add widget
+    const tmp = document.createElement('div')
+    tmp.innerHTML = mod.widget().trim()
+    const wg = tmp.firstChild
+    wg.id = 'wg-'+id
+    main.appendChild(wg)
+  } else {
+    // remove
+    const navEl = document.getElementById('nav-'+id)
+    const wgEl = document.getElementById('wg-'+id)
+    if(navEl){ navEl.style.opacity='0'; navEl.style.transform='translateX(-8px)'; setTimeout(()=>navEl.remove(),250) }
+    if(wgEl){ wgEl.style.opacity='0'; wgEl.style.transform='scale(.8)'; wgEl.style.transition='all .25s ease'; setTimeout(()=>wgEl.remove(),250) }
+  }
+
+  const count = document.querySelectorAll('.mc.on').length
+  document.getElementById('modCountN').textContent = count
+  empty.style.display = count ? 'none' : 'flex'
+}
+
+renderMods()
+
+// ── NAV scroll ──
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.borderBottomColor = window.scrollY>10 ? 'rgba(255,255,255,.12)' : 'rgba(255,255,255,.07)'
+})
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))
+})
+
+// ── FORM ──
+function handleForm(e){
+  setTimeout(()=>{
+    document.getElementById('cfForm').style.display='none'
+    document.getElementById('cfOk').style.display='block'
+  },500)
+}
+
+// ── REVEAL ──
+const io = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.08})
+document.querySelectorAll('.rev').forEach(el=>io.observe(el))
+</script>
+</body>
+</html>
