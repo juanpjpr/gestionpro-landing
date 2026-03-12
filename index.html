@@ -806,12 +806,22 @@ function handleForm(e){
   btn.textContent = 'Enviando...'
   btn.disabled = true
 
-  emailjs.sendForm('service_qsfjmws', 'm95b8ur', form)
+  const params = {
+    title: 'Nueva consulta — GestiónPro',
+    name:     form.querySelector('[name="name"]').value,
+    email:    form.querySelector('[name="email"]').value,
+    negocio:  form.querySelector('[name="negocio"]').value,
+    servicio: form.querySelector('[name="servicio"]').value,
+    mensaje:  form.querySelector('[name="mensaje"]').value,
+  }
+
+  emailjs.send('service_qsfjmws', 'm95b8ur', params)
     .then(()=>{
       form.style.display='none'
       document.getElementById('cfOk').style.display='block'
     })
-    .catch(()=>{
+    .catch((err)=>{
+      console.error('EmailJS error:', err)
       btn.textContent = 'Error al enviar. Intentá de nuevo.'
       btn.disabled = false
     })
